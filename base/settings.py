@@ -20,13 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zkk)xig6)m^5i9my46zudhggr*^&sbh34q)3owe092#i#$42=2'
+SECRET_KEY = 'django-insecure-45z9vb85cgw4dl5zu3kz=*1bx*5ydx11p+&y*p!(+$djy9(u=g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# change roofmaster.com if domain name changes
-ALLOWED_HOSTS = ['127.0.0.1', '.roofmasters.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 
 # Application definition
@@ -38,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'create_page',
 ]
 
 MIDDLEWARE = [
