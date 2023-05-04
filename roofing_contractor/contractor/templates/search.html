@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Search Results</h1>
+    {% if customers %}
+        <h2>Customers</h2>
+        <ul>
+        {% for customer in customers %}
+            <li><a href="{% url 'find' customer.id %}">{{ customer.name }}</a></li>
+        {% endfor %}
+        </
