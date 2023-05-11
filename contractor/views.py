@@ -4,7 +4,7 @@ from .models import Customer, Job, Bid
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'contractor/home.html', {})
 
 def search(request):
     query = request.GET.get('q')
