@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 class Customer(models.Model):
@@ -13,3 +14,4 @@ class Bid(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     # Add any other relevant fields for bids
+

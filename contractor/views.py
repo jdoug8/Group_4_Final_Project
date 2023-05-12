@@ -1,5 +1,5 @@
 # views.py in the contractor app
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Customer, Bid
 
 def home(request):
