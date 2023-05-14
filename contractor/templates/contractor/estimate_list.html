@@ -1,0 +1,15 @@
+{% extends 'contractor/base.html' %}
+
+{% block content %}
+
+    {% for estiamte in estiamtes %}
+        <article class="estimate">
+            <time class="date">
+                {{ estiamte.published_date }}
+            </time>
+            <h2><a href="{% url 'estimate_detail' pk=estimate.pk %}">{{ estiamte.title }}</a></h2>
+            <p>{{ estimate.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+
+{% endblock%}

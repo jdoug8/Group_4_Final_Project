@@ -8,11 +8,28 @@ class Customer(models.Model):
     address = models.CharField(max_length=200)
     # Add any other relevant fields for customers
     
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.title
+    
 class Job(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     description = models.TextField()
+    
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.title
     
 class Bid(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=8, decimal_places=2)
 
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.title
