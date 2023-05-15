@@ -2,4 +2,40 @@
 
 {% block content %}
 
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Customers</h2>
+        <a href="{% url 'customer_new' %}" class="btn btn-primary">Add Customer</a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for customer in customer_list %}
+              <tr>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.address }}</td>
+                <td>
+                  <a href="{% url 'customer_edit' customer.id %}" class="btn btn-primary">Edit</a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">No customers found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 {% endblock%}

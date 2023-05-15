@@ -2,4 +2,36 @@
 
 {% block content %}
 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>{% if job %}Edit{% else %}Add{% endif %} Job</h2>
+        <form method="POST">
+          {% csrf_token %}
+          {% if job %}
+            <input type="hidden" name="job_id" value="{{ job.id }}">
+          {% endif %}
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" value="{% if job %}{{ job.title }}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description">{% if job %}{{ job.description }}{% endif %}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="customer">Customer:</label>
+            <select class="form-control" id="customer" name="customer">
+              {% for customer in customers %}
+                <option value="{{ customer.id }}" {% if job and job.customer == customer %}selected{% endif %}>{{ customer.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">{% if job %}Update{% else %}Add{% endif %}</button>
+          <a href="{% url 'job_list' %}" class="btn btn-default">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
 {% endblock%}

@@ -16,17 +16,33 @@ def search(request):
     return render(request, 'contractor/search.html', {'customers': customers, 'bids': bids})
 
 def customer_list(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.order_by('name')
     return render(request, 'contractor/customer_list.html', {'customers': customers})
 
-def customer_edit(request, pk):
-    customer = get_object_or_404(Customer, pk=pk)
+def customer_detail(request, id):
+    customer = get_object_or_404(Customer, id=id)
+    return render(request, 'contractor/customer_detail.html', {'customer': customer})
+
+def customer_new(request):
+    if request.method == "POST":
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            customer = form.save(commit=False)
+            customer.save()
+            return redirect('customer_list', id=customer.id)
+    else:
+        form = CustomerForm()
+    return render(request, 'contractor/customer_edit.html', {'form': form})
+
+def customer_edit(request, id):
+    customer = get_object_or_404(Customer, id=id)
     if request.method == "POST":
         form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():
             customer = form.save(commit=False)
+            customer.name = request.user
             customer.save()
-            return redirect('customer_list', pk=customer.pk)
+            return redirect('customer_list', id=customer.id)
     else:
         form = CustomerForm(instance=customer)
     return render(request, 'contractor/customer_edit.html', {'customer': customer})
@@ -36,14 +52,29 @@ def job_list(request):
     jobs = Job.objects.filter(customer=customer)
     return render(request, 'contractor/job_list.html', {'customer': customer, 'jobs': jobs})
 
-def job_edit(request, pk):
-    job = get_object_or_404(Bid, pk=pk)
+def job_detail(request, id):
+    job = get_object_or_404(Job, id=id)
+    return render(request, 'contractor/job_detail.html', {'job': job})
+
+def job_new(request):
+    if request.method == "POST":
+        form = JobForm(request.POST)
+        if form.is_valid():
+            job = form.save(commit=False)
+            job.save()
+            return redirect('job_list', id=job.id)
+    else:
+        form = CustomerForm()
+    return render(request, 'contractor/job_edit.html', {'form': form})
+
+def job_edit(request, id):
+    job = get_object_or_404(Bid, id=id)
     if request.method == "POST":
         form = JobForm(request.POST, instance=job)
         if form.is_valid():
             job = form.save(commit=False)
             job.save()
-            return redirect('job_list', pk=job.pk)
+            return redirect('job_list', id=job.id)
     else:
         form = BidForm(instance=job)
     return render(request, 'contractor/job_edit.html', {'job': job})
@@ -54,14 +85,29 @@ def estimate_list(request):
     estimates = Bid.objects.filter(job=job)
     return render(request, 'contractor/estimate_list.html', {'customer': customer, 'job': job, 'estimates': estimates})
 
-def estimate_edit(request, pk):
-    estimate = get_object_or_404(Bid, pk=pk)
+def estimate_detail(request, id):
+    estimate = get_object_or_404(Bid, id=id)
+    return render(request, 'contractor/estimate_detail.html', {'estimate': estimate})
+
+def estimate_new(request):
+    if request.method == "POST":
+        form = BidForm(request.POST)
+        if form.is_valid():
+            estimate = form.save(commit=False)
+            estimate.save()
+            return redirect('estimate_list', id=estimate.id)
+    else:
+        form = BidForm()
+    return render(request, 'contractor/estimate_edit.html', {'form': form})
+
+def estimate_edit(request, id):
+    estimate = get_object_or_404(Bid, id=id)
     if request.method == "POST":
         form = BidForm(request.POST, instance=estimate)
         if form.is_valid():
             estimate = form.save(commit=False)
             estimate.save()
-            return redirect('estimate_list', pk=estimate.pk)
+            return redirect('estimate_list', id=estimate.id)
     else:
         form = BidForm(instance=estimate)
     return render(request, 'contractor/estimate_edit.html', {'estimate': estimate})

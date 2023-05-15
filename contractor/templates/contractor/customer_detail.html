@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container my-5">
+    <h1>Customer Details</h1>
+    <hr>
+
+    <div class="card my-3">
+      <div class="card-header">
+        <h3 class="card-title">Customer #{{ customer.id }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Customer Information:</h4>
+            <hr>
+            <dl class="row">
+              <dt class="col-sm-4">Name:</dt>
+              <dd class="col-sm-8">{{ customer.name }}</dd>
+
+              <dt class="col-sm-4">Email:</dt>
+              <dd class="col-sm-8">{{ customer.email }}</dd>
+
+              <dt class="col-sm-4">Phone:</dt>
+              <dd class="col-sm-8">{{ customer.phone }}</dd>
+
+              <dt class="col-sm-4">Address:</dt>
+              <dd class="col-sm-8">{{ customer.address }}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

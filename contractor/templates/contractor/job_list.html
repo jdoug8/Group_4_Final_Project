@@ -1,5 +1,36 @@
 {% extends 'contractor/base.html' %}
 
 {% block content %}
+  
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Jobs</h2>
+        <a href="{% url 'job_new' %}" class="btn btn-primary">Add Job</a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for jobs in job_list %}
+              <tr>
+                <td>{{ job.customer }}</td>
+                <td>{{ job.description }}</td>
+                  <a href="{% url 'job_edit' job.id %}" class="btn btn-primary">Edit</a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">No jobs found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-{% endblock%}
+{% endblock %}

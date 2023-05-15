@@ -1,15 +1,36 @@
 {% extends 'contractor/base.html' %}
 
 {% block content %}
+  
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Estimates</h2>
+        <a href="{% url 'estimate_new' %}" class="btn btn-primary">Add Estimate</a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Job</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for estimate in estimate_list %}
+              <tr>
+                <td>{{ estimate.job }}</td>
+                <td>{{ estimate.price }}</td>
+                  <a href="{% url 'estimate_edit' estimate.id %}" class="btn btn-primary">Edit</a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">No estimates found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-    {% for estiamte in estiamtes %}
-        <article class="estimate">
-            <time class="date">
-                {{ estiamte.published_date }}
-            </time>
-            <h2><a href="{% url 'estimate_detail' pk=estimate.pk %}">{{ estiamte.title }}</a></h2>
-            <p>{{ estimate.text|linebreaksbr }}</p>
-        </article>
-    {% endfor %}
-
-{% endblock%}
+{% endblock %}

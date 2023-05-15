@@ -5,17 +5,17 @@ from .models import Customer, Job, Bid
 class CustomerForm(forms.ModelForm):
 
     class Meta:
-        model_1 = Customer
-        fields = ('name', 'text',)
+        model= Customer
+        fields = ('name','email', 'phone', 'address',)
 
 class JobForm(forms.ModelForm):
     
     class Meta:
-        model_2 = Job
-        fields = ('name', 'text')
+        model= Job
+        fields = ('customer', 'description')
         
 class BidForm(forms.ModelForm):
     
     class Meta:
-        model_3 = Bid
-        fields = ('name','text')
+        model = Bid
+        fields = ('job','price')
