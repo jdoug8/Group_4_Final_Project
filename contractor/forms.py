@@ -18,4 +18,4 @@ class BidForm(forms.ModelForm):
     
     class Meta:
         model = Bid
-        fields = ('job','price')
+        fields = ('job', 'price')

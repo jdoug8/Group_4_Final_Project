@@ -12,7 +12,7 @@ class Customer(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return self.name
     
 class Job(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -22,14 +22,14 @@ class Job(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return str(self.customer)
     
 class Bid(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def publish(self):
         self.save()
 
     def __str__(self):
-        return self.title
+        return str(self.job)

@@ -13,7 +13,7 @@ def search(request):
     customers = Customer.objects.filter(name__icontains=query)
     jobs = Job.objects.filter(customer_name__icontains=query)
     bids = Bid.objects.filter(customer__name__icontains=query)
-    return render(request, 'contractor/search.html', {'customers': customers, 'bids': bids})
+    return render(request, 'contractor/search.html', {'customers': customers, 'jobs': jobs, 'bids': bids})
 
 def customer_list(request):
     customers = Customer.objects.order_by('name')
@@ -48,9 +48,8 @@ def customer_edit(request, id):
     return render(request, 'contractor/customer_edit.html', {'customer': customer})
 
 def job_list(request):
-    customer = Customer.objects.all()
-    jobs = Job.objects.filter(customer=customer)
-    return render(request, 'contractor/job_list.html', {'customer': customer, 'jobs': jobs})
+    jobs = Job.objects.order_by('customer')
+    return render(request, 'contractor/job_list.html', {'jobs': jobs})
 
 def job_detail(request, id):
     job = get_object_or_404(Job, id=id)
@@ -80,10 +79,8 @@ def job_edit(request, id):
     return render(request, 'contractor/job_edit.html', {'job': job})
 
 def estimate_list(request):
-    customer = Customer.objects.all()
-    job = Job.objects.filter(customer=customer)
-    estimates = Bid.objects.filter(job=job)
-    return render(request, 'contractor/estimate_list.html', {'customer': customer, 'job': job, 'estimates': estimates})
+    estimates = Bid.objects.order_by('job')
+    return render(request, 'contractor/estimate_list.html', {'estimates': estimates})
 
 def estimate_detail(request, id):
     estimate = get_object_or_404(Bid, id=id)

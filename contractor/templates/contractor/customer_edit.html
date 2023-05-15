@@ -46,9 +46,9 @@
 {% if customer %}{{ customer.address }}{% endif %}</textarea
           >
         </div>
-        <button type="submit" class="btn btn-primary">
+        <a href="{% url 'customer_new' %}" button type="submit" class="btn btn-primary">
           {% if customer %}Update{% else %}Add{% endif %}
-        </button>
+        </a>
         <a href="{% url 'customer_list' %}" class="btn btn-default">Cancel</a>
       </form>
     </div>
